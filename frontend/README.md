@@ -1,42 +1,42 @@
 # Smart Oscilloscope & Signal Analysis Platform
 
-A full-stack, AI-powered signal analysis platform that combines embedded signal acquisition, real-time DSP (FFT), machine learning-based anomaly detection, and a live web dashboard — with automated PDF diagnostic reporting.
+A full-stack signal analysis system that combines embedded signal acquisition, real-time DSP (FFT), machine learning-based anomaly detection, and a live web dashboard — inspired by real oscilloscope diagnostic tools.
 
-## 🎯 Overview
+## Overview
 
-This project simulates a smart oscilloscope system: signals are generated (simulating real ADC acquisition from an ESP32), analyzed in real time using FFT-based spectral analysis, and monitored for anomalies using a trained Isolation Forest ML model. All of this is streamed live to a React dashboard via WebSockets, with the ability to generate on-demand PDF diagnostic reports.
+This project simulates a smart, AI-assisted oscilloscope. Signal data is generated (with support for real ESP32-based ADC acquisition), analyzed in real time using FFT-based spectral analysis, and monitored using a trained Isolation Forest model to detect anomalies such as noise spikes and glitches. All of this is visualized live in a web dashboard, with automated PDF diagnostic report generation.
 
-## ✨ Features
+## Features
 
-- **Real-time signal streaming** via WebSockets (FastAPI backend → React frontend)
-- **FFT-based spectral analysis** for frequency-domain signal inspection
-- **ML-based anomaly detection** using a trained Isolation Forest model (scikit-learn)
-- **Live dashboard** with time-domain and frequency-domain visualizations (Recharts)
-- **Automated PDF report generation** with waveform snapshots, FFT plots, and anomaly logs
-- **Embedded firmware** (ESP32, C++) for real ADC signal acquisition — simulated via Wokwi
+- **Real-time signal streaming** via WebSocket (FastAPI backend → React frontend)
+- **FFT-based spectral analysis** using SciPy — time domain and frequency domain visualization
+- **ML-based anomaly detection** using scikit-learn's Isolation Forest, trained on normal signal patterns
+- **Live web dashboard** built with React and Recharts, showing waveform + FFT + real-time anomaly alerts
+- **Automated PDF report generation** — waveform snapshots, FFT spectrum, and anomaly summary
+- **Embedded firmware (ESP32)** — real ADC sampling code, simulated using Wokwi (no physical hardware required)
 
-## 🏗️ Architecture
+## Architecture
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Embedded | ESP32, C++ (Arduino framework), simulated via Wokwi |
+| Embedded | ESP32 (C++/Arduino), simulated via Wokwi |
 | Backend | Python, FastAPI, WebSockets |
 | DSP | NumPy, SciPy (FFT) |
 | Machine Learning | scikit-learn (Isolation Forest) |
 | Frontend | React, Recharts |
-| Reporting | Matplotlib, ReportLab |
+| Reports | Matplotlib, ReportLab |
 
-## 🚀 Getting Started
+## Setup Instructions
 
 ### Backend
 ```bash
 cd backend
 python -m venv venv
-venv\Scripts\activate          # Windows
-pip install -r requirements.txt
-python train_model.py          # trains the anomaly detection model
+venv\Scripts\activate      # Windows
+pip install fastapi uvicorn numpy scipy scikit-learn websockets python-multipart matplotlib reportlab
+python train_model.py      # trains the anomaly detection model
 uvicorn main:app --reload --port 8000
 ```
 
@@ -46,26 +46,22 @@ cd frontend
 npm install
 npm run dev
 ```
-Open `http://localhost:5173` in your browser.
 
-### Embedded Firmware
-Firmware code is in `/firmware`. Open in [Wokwi](https://wokwi.com) or flash directly to a real ESP32 board.
+Open `http://localhost:5173` in your browser to view the live dashboard.
 
-## 📊 Demo
+### Generate a Report
+While the dashboard is running, visit:
 
-*(Add your demo GIF/video here)*
+### Embedded Firmware (Wokwi Simulation)
+The ESP32 firmware code (ADC sampling logic) is available in the `firmware/` folder. It can be run using [Wokwi](https://wokwi.com) — no physical hardware required.
 
-## 📄 Sample Report
-
-Click "Generate Report" on the dashboard, or visit `http://localhost:8000/report` while the dashboard is streaming live data.
-
-## 🔮 Future Improvements
+## Future Improvements
 
 - Multi-channel signal comparison
-- Signal type classification (PWM, sine, square, etc.)
-- Real hardware deployment with live sensor integration
-- Cloud-based data logging and historical trend analysis
+- Real hardware integration (physical ESP32 + ADC)
+- Signal classification (PWM, sine, square wave detection)
+- WiFi-based direct ESP32-to-backend streaming
 
-## 👤 Author
+## Author
 
-Built by [S.Udaiyappan] as a personal project exploring embedded systems, DSP, and applied machine learning.
+Built by Udaiyappan as a personal project combining embedded systems, DSP, machine learning, and full-stack development.
