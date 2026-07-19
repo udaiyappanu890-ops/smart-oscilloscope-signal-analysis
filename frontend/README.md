@@ -1,16 +1,71 @@
-# React + Vite
+# Smart Oscilloscope & Signal Analysis Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A full-stack, AI-powered signal analysis platform that combines embedded signal acquisition, real-time DSP (FFT), machine learning-based anomaly detection, and a live web dashboard — with automated PDF diagnostic reporting.
 
-Currently, two official plugins are available:
+## 🎯 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This project simulates a smart oscilloscope system: signals are generated (simulating real ADC acquisition from an ESP32), analyzed in real time using FFT-based spectral analysis, and monitored for anomalies using a trained Isolation Forest ML model. All of this is streamed live to a React dashboard via WebSockets, with the ability to generate on-demand PDF diagnostic reports.
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Real-time signal streaming** via WebSockets (FastAPI backend → React frontend)
+- **FFT-based spectral analysis** for frequency-domain signal inspection
+- **ML-based anomaly detection** using a trained Isolation Forest model (scikit-learn)
+- **Live dashboard** with time-domain and frequency-domain visualizations (Recharts)
+- **Automated PDF report generation** with waveform snapshots, FFT plots, and anomaly logs
+- **Embedded firmware** (ESP32, C++) for real ADC signal acquisition — simulated via Wokwi
 
-## Expanding the Oxlint configuration
+## 🏗️ Architecture
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Embedded | ESP32, C++ (Arduino framework), simulated via Wokwi |
+| Backend | Python, FastAPI, WebSockets |
+| DSP | NumPy, SciPy (FFT) |
+| Machine Learning | scikit-learn (Isolation Forest) |
+| Frontend | React, Recharts |
+| Reporting | Matplotlib, ReportLab |
+
+## 🚀 Getting Started
+
+### Backend
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate          # Windows
+pip install -r requirements.txt
+python train_model.py          # trains the anomaly detection model
+uvicorn main:app --reload --port 8000
+```
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Open `http://localhost:5173` in your browser.
+
+### Embedded Firmware
+Firmware code is in `/firmware`. Open in [Wokwi](https://wokwi.com) or flash directly to a real ESP32 board.
+
+## 📊 Demo
+
+*(Add your demo GIF/video here)*
+
+## 📄 Sample Report
+
+Click "Generate Report" on the dashboard, or visit `http://localhost:8000/report` while the dashboard is streaming live data.
+
+## 🔮 Future Improvements
+
+- Multi-channel signal comparison
+- Signal type classification (PWM, sine, square, etc.)
+- Real hardware deployment with live sensor integration
+- Cloud-based data logging and historical trend analysis
+
+## 👤 Author
+
+Built by [S.Udaiyappan] as a personal project exploring embedded systems, DSP, and applied machine learning.
