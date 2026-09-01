@@ -7,7 +7,7 @@ function App() {
   const [anomaly, setAnomaly] = useState(false);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8000/ws/live");
+       const ws = new WebSocket("wss://smart-oscilloscope-signal-analysis.onrender.com/ws/live");
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       const wave = data.times.map((t, i) => ({ time: t.toFixed(3), value: data.samples[i] }));
