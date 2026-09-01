@@ -1,8 +1,11 @@
-   fastapi
-   uvicorn
-   numpy
-   scipy
-   scikit-learn
-   matplotlib
-   websockets
-   python-multipart
+fastapi
+uvicorn
+numpy
+scipy
+scikit-learn
+matplotlib
+websockets
+python-multipart
+reportlab
+joblib
+pydantic
