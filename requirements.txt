@@ -1,2 +1,8 @@
    fastapi
    uvicorn
+   numpy
+   scipy
+   scikit-learn
+   matplotlib
+   websockets
+   python-multipart
